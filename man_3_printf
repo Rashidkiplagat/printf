@@ -119,3 +119,12 @@ unsigned hexidecimal notation (x) for lower case and (X) for upper case
 .B S
 - ascii <32 & >127 has to appear in the argument string. converted to
 hexadecimal preceded by \x
+
+.RE
+
+.P
+
+.SH "AUTHORS"
+.SH ""
+
+Hafsa Muchoki and Rashid Kiplagat
