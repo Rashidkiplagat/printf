@@ -1,61 +1,83 @@
-#ifndef _MAIN_H_
-#define _MAIN_H_
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <stdarg.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-/**
- * struct print - struct for printer functions
- * @type_arg: identifier
- * @f: pointer to a printer functions
- *
- * Description: struct that stores pointers to a
- * printer functions.
- */
-typedef struct print
-{
-	char *type_arg;
-	int (*f)(va_list, char *, unsigned int);
-} print_t;
-
+/* mandatory functions */
 int _printf(const char *format, ...);
-int print_prg(va_list __attribute__((unused)), char *, unsigned int);
-int print_chr(va_list arguments, char *buf, unsigned int ibuf);
-int print_str(va_list arguments, char *buf, unsigned int ibuf);
-int print_int(va_list arguments, char *buf, unsigned int ibuf);
-int print_bnr(va_list arguments, char *buf, unsigned int ibuf);
-int print_unt(va_list arguments, char *buf, unsigned int ibuf);
-int print_oct(va_list arguments, char *buf, unsigned int ibuf);
-int print_hex(va_list arguments, char *buf, unsigned int ibuf);
-int print_upx(va_list arguments, char *buf, unsigned int ibuf);
-int print_usr(va_list arguments, char *buf, unsigned int ibuf);
-int print_add(va_list arguments, char *buf, unsigned int ibuf);
-int print_rev(va_list arguments, char *buf, unsigned int ibuf);
-int print_rot(va_list arguments, char *buf, unsigned int ibuf);
-int prinlint(va_list arguments, char *buf, unsigned int ibuf);
-int prinlunt(va_list arguments, char *buf, unsigned int ibuf);
-int prinloct(va_list arguments, char *buf, unsigned int ibuf);
-int prinlhex(va_list arguments, char *buf, unsigned int ibuf);
-int prinlupx(va_list arguments, char *buf, unsigned int ibuf);
-int prinhint(va_list arguments, char *buf, unsigned int ibuf);
-int prinhunt(va_list arguments, char *buf, unsigned int ibuf);
-int prinhoct(va_list arguments, char *buf, unsigned int ibuf);
-int prinhhex(va_list arguments, char *buf, unsigned int ibuf);
-int prinhupx(va_list arguments, char *buf, unsigned int ibuf);
-int prinpint(va_list arguments, char *buf, unsigned int ibuf);
-int prinnoct(va_list arguments, char *buf, unsigned int ibuf);
-int prinnhex(va_list arguments, char *buf, unsigned int ibuf);
-int prinnupx(va_list arguments, char *buf, unsigned int ibuf);
-int prinsint(va_list arguments, char *buf, unsigned int ibuf);
-int (*get_print_func(const char *s, int index))(va_list, char *, unsigned int);
-int ev_print_func(const char *s, int index);
-unsigned int handl_buf(char *buf, char c, unsigned int ibuf);
-int print_buf(char *buf, unsigned int nbuf);
-char *fill_binary_array(char *binary, long int int_in, int isneg, int limit);
-char *fill_oct_array(char *bnr, char *oct);
-char *fill_long_oct_array(char *bnr, char *oct);
-char *fill_short_oct_array(char *bnr, char *oct);
-char *fill_hex_array(char *bnr, char *hex, int isupp, int limit);
 
-#endif
+/* Task 0 */
+int _putchar(char c);
+
+/* Task 1 */
+int print_char(va_list args);
+int print_string(va_list args);
+int print_percent(va_list args);
+
+/* Task 2 */
+int print_integer(va_list args);
+int print_decimal(va_list args);
+
+/* Task 3 */
+int print_unsigned(va_list args);
+int print_octal(va_list args);
+int print_hexadecimal(va_list args);
+int print_HEX(va_list args);
+
+/* Task 4 */
+int _printf(const char *format, ...);
+
+/* Task 5 */
+int print_string_uppercase(va_list args);
+
+/* Task 6 */
+int print_address(va_list args);
+
+/* Task 7 */
+int print_integer_positive(va_list args);
+int print_integer_space(va_list args);
+int print_hexadecimal_lower_case(va_list args);
+
+/* Task 8 */
+int print_long(va_list args);
+int print_short(va_list args);
+int print_unsigned_short(va_list args);
+int print_unsigned_long(va_list args);
+int print_unsigned_long_long(va_list args);
+
+/* Task 9 */
+int print_integer_width(va_list args, int width);
+int print_char_width(va_list args, int width);
+int print_string_width(va_list args, int width);
+
+/* Task 10 */
+int print_integer_precision(va_list args, int precision);
+int print_decimal_precision(va_list args, int precision);
+int print_octal_precision(va_list args, int precision);
+int print_hexadecimal_precision(va_list args, int precision);
+int print_HEX_precision(va_list args, int precision);
+int print_string_precision(va_list args, int precision);
+
+/* Task 11 */
+int print_integer_zero_flag(va_list args, int width);
+int print_decimal_zero_flag(va_list args, int width);
+int print_octal_zero_flag(va_list args, int width);
+int print_hexadecimal_zero_flag(va_list args, int width);
+int print_HEX_zero_flag(va_list args, int width);
+
+/* Task 12 */
+int print_integer_left_flag(va_list args, int width);
+int print_decimal_left_flag(va_list args, int width);
+int print_octal_left_flag(va_list args, int width);
+int print_hexadecimal_left_flag(va_list args, int width);
+int print_HEX_left_flag(va_list args, int width);
+
+/* Task 13 */
+int print_reverse(va_list args);
+
+/* Task 14 */
+int print_rot13(va_list args);
+
+#endif /* main.h */
