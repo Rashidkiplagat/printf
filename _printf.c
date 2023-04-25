@@ -1,8 +1,12 @@
+#include <stdio.h>
+#include <stdarg.h>
+#include <string.h>
 #include "main.h"
 
 void print_buffer(char buffer[], int *buff_ind);
 
 /**
+<<<<<<< HEAD
  * _printf - Printf function
  * @format: format.
  * Return: Printed chars.
@@ -13,10 +17,26 @@ int _printf(const char *format, ...)
 	int flags, width, precision, size, buff_ind = 0;
 	va_list list;
 	char buffer[BUFF_SIZE];
+=======
+ * _printf - produces output according to a format
+ * @format: format string containing the characters and the specifiers
+ * Description: this function will call the get_print() function that will
+ * determine which printing function to call depending on the conversion
+ * specifiers contained into fmt
+ * Return: length of the formatted output string
+ * Authors: Ehoneah Obed & Abdulhakeem Badejo
+ */
+int _printf(const char *format, ...)
+{
+	int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
+>>>>>>> 97605d942f544f20861516e8039d76f9ee5a553b
 
-	if (format == NULL)
-		return (-1);
+	register int count = 0;
 
+<<<<<<< HEAD
 	va_start(list, format);
 
 	for (i = 0; format && format[i] != '\0'; i++)
@@ -50,6 +70,35 @@ int _printf(const char *format, ...)
 	va_end(list);
 
 	return (printed_chars);
+=======
+	va_start(arguments, format);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = format; *p; p++)
+	{
+		if (*p == '%')
+		{
+			p++;
+			if (*p == '%')
+			{
+				count += _putchar('%');
+				continue;
+			}
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print(*p);
+			count += (pfunc)
+				? pfunc(arguments, &flags)
+				: _printf("%%%c", *p);
+		} else
+			count += _putchar(*p);
+	}
+	_putchar(-1);
+	va_end(arguments);
+	return (count);
+>>>>>>> 97605d942f544f20861516e8039d76f9ee5a553b
 }
 
 /**
