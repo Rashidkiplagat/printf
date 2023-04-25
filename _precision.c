@@ -1,37 +1,43 @@
+#include <stdio.h>
+#include <stdarg.h>
 #include "main.h"
-
 /**
- * _precision - handles the precision for non-custom conversion specifiers
- * @format: the format to print
- * @i: list of arguments to be printed
- * @list: the list of arguments passed
- * Returns: printed characters
+ * get_precision - Calculates the precision for printing
+ * @format: Formatted string in which to print the arguments
+ * @i: List of arguments to be printed
+ * @list: list of arguments
+ * Return: Precision.
  */
-
-int _precision(const char *format, int *i, va_list list)
+int get_precision(const char *format, int *i, va_list list)
 {
-	int precision;
-	char current_char;
-	va_list list_cpy;
+	int curr_i = *i + 1;
+	int precision = -1;
 
-	va_copy(list_cpy, list);/*creat a copy of the list of arguments passed*/
-	va_start(list_cpy, list);/*initializes the list*/
-	precision = 0;/*this initializes the precision value to 0 and stores*/
-	current_char = format[*i];/*then checks the current char in format str*/
+	if (format[curr_i] != '.')
+		return precision;
 
-	if (current_char != '.')/*if current char is a '.' it then skipps*/
+	precision = 0;
+
+	for (curr_i += 1; format[curr_i] != '\0'; curr_i++)
 	{
-		va_end(list_cpy);/*frees list*/
-		return (precision);
-	}
-	(*i)++;/*loops through the digits presented by i*/
-	current_char = format[*i];
-	while (current_char >= '0'&& current_char <= '9')/*loops over digits*/
+		if (format[curr_i] == '*')
 	{
-		precision = precision * 10 + current_char - '0';
-		(*i)++;
-		current_char = format[*i];
+		precision = va_arg(list, int);
+		curr_i++;
+		break;
 	}
-	va_end(list_cpy);
-	return (precision);
+	else if (format[curr_i] >= '0' && format[curr_i] <= '9')
+	{
+		precision *= 10;
+		precision += format[curr_i] - '0';
+	}
+	else
+	{
+		break;
+	}
+	}
+
+	*i = curr_i - 1;
+
+	return precision;
 }
